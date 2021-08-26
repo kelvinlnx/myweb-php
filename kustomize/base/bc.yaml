@@ -1,0 +1,25 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: myweb:latest
+  source:
+    git:
+      uri: https://github.com/kelvinlnx/myweb
+    type: Git
+  strategy:
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: ubi:latest
+    type: Docker
+  triggers:
+  - type: ConfigChange
+  - imageChange: {}
+    type: ImageChange

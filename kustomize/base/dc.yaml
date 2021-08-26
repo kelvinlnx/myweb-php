@@ -1,0 +1,35 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+spec:
+  replicas: 1
+  selector:
+    deploymentconfig: myweb
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      labels:
+        deploymentconfig: myweb
+    spec:
+      containers:
+      - image: myweb:latest
+        name: myweb
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - myweb
+      from:
+        kind: ImageStreamTag
+        name: myweb:latest
+    type: ImageChange

@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: myweb
+  name: myweb
+spec:
+  host: myweb-nnmref-one.apps.ap46.prod.nextcle.com
+  port:
+    targetPort: 8080-tcp
+  to:
+    kind: Service
+    name: myweb
+    weight: 100

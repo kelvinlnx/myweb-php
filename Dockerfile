@@ -16,4 +16,4 @@ ADD src/* /var/www/html/
 
 USER 1008
 
-ENTRYPOINT php-fpm & httpd -DFOREGROUND
+CMD php-fpm & httpd -DFOREGROUND

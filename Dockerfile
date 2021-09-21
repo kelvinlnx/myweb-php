@@ -16,6 +16,6 @@ RUN yum install -y httpd php-fpm; \
 
 ADD src/* /var/www/html/
 
-USER 1008
+USER root
 
 ENTRYPOINT php-fpm & httpd -DFOREGROUND
